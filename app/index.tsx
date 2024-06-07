@@ -1,18 +1,27 @@
-import { Stack, Link } from 'expo-router';
+import { Entypo } from '@expo/vector-icons';
+import { Stack, useRouter } from 'expo-router';
+import { Pressable, Text } from 'react-native';
 
-import { Button } from '~/components/Button';
 import { Container } from '~/components/Container';
-import { ScreenContent } from '~/components/ScreenContent';
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen
+        options={{
+          title: 'Home',
+          headerRight: () => {
+            return (
+              <Pressable onPress={() => router.push('/new')}>
+                <Entypo name="plus" size={24} color="black" />
+              </Pressable>
+            );
+          },
+        }}
+      />
       <Container>
-        <ScreenContent path="app/index.tsx" title="Home" />
-        <Link href={{ pathname: '/details', params: { name: 'Dan' } }} asChild>
-          <Button title="Show Details" />
-        </Link>
+        <Text>Add your code here</Text>
       </Container>
     </>
   );
